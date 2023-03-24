@@ -44,6 +44,9 @@ Under the folder /script you will find several .js files. Here I'll explain how 
 <li> "variable.js" holds and objects that stores all the variables that can be customised by the user.
 <li> "main.js" holds all the variables, errors and functions, linked or imported from the other files. 
 
+### Testing
+We have tested the code on Chrome, Opera, Edge, Firefox and Safari, and it's fully functional. The Windows emojis added to the code are seamlessly translated to the MacOS.
+
 ### Functions
 Here you'll find a detailed explanation to every function we have created. 
 <br> <br>
