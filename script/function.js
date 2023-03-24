@@ -1,5 +1,6 @@
 import { variablesList } from "./variable.js";
 import {supermarket, initialDate, t, productsList, usedId} from "./main.js"
+
 /**
  * adds the 0-padding to the ID code of each item. this function also checks that every new item has a 
  * different ID number.
@@ -7,8 +8,6 @@ import {supermarket, initialDate, t, productsList, usedId} from "./main.js"
  * @param {void} void
  * @return {String}
  */
-
-
 function padNum(){
     let accepted=false;
     let n=0;
