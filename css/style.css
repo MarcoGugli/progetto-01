@@ -1,0 +1,17 @@
+#product-list{
+    letter-spacing: 2px;
+    font-family: Courier;
+    text-align: center;
+}
+
+td{
+    padding: 5px 10px;
+}
+
+.title-bold{
+    font-weight: bold;
+}
+
+.align-left{
+    text-align: left;
+}
