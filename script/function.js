@@ -5,17 +5,25 @@ import {supermarket, initialDate, t, productsList, usedId} from "./main.js"
  * adds the 0-padding to the ID code of each item. this function also checks that every new item has a 
  * different ID number.
  * @name padNum
- * @param {void} void
+ * @param
  * @return {String}
  */
 function padNum(){
+    //boolean variable that indicates wheter an acceptable ID has been generated. Initialised to "false".
     let accepted=false;
+    //integer variable that indicates the ID number. Initialised to 0.
     let n=0;
 
     if(variablesList.casualGenerationOfId==false){
        n+=productsList.length;
     }
     else if(variablesList.casualGenerationOfId==true){
+/**
+ * this function generates a random number
+ * @name generate
+ * @param
+ * @returns {Number}
+ */
         function generate(){
             let num=Math.floor(Math.random()*(variablesList.numNewProducts*variablesList.weeksUntilEnd)+0);
     
@@ -42,11 +50,11 @@ function padNum(){
 /**
  * updates the status of the items
  * @name productState
- * @param {void} void
+ * @param 
  * @return {String}
  */
 function productState(){
-    //array contenente gli stati degli articoli
+    //declaring an array that contains the statuses that will later be assigned to the items
     let itemStatus = ['New', 'Valid', 'Old', 'Expired']
     let d=new Date(initialDate);
 

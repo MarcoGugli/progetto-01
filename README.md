@@ -35,21 +35,24 @@ The licensor cannot revoke these freedoms as long as you follow the license term
 Variables: camelCase
 Files and Folder: kebab-case
 
-## Approach To Solution
+## Approach to Solution
 ***
-### Data management 
-Under the folder /script you will find several .js files. Here I'll explain how each of them works and what kind of data they hold.
-<li> "errors.js" holds all the possible errors the code could generate, depending on which variables the user inserts. Each of these errors will output a message on the console.
-<li> "function.js" holds all the functions we have created and used in this project.
-<li> "variable.js" holds and objects that stores all the variables that can be customised by the user.
-<li> "main.js" holds all the variables, errors and functions, linked or imported from the other files. 
 
-### Testing
+### <u>Data Management</u>
+Under the folder /script you will find several .js files. Here I'll explain how each of them works and what kind of data they hold.
+- "errors.js" holds all the possible errors the code could generate, depending on which variables the user inserts. Each of these errors will output a message on the console.
+- "function.js" holds all the functions we have created and used in this project.
+- "variable.js" holds and objects that stores all the variables that can be customised by the user.
+- "main.js" holds all the variables, errors and functions, linked or imported from the other files.
+## Approach To Solution
+
+### <u>Testing</u>
 We have tested the code on Chrome, Opera, Edge, Firefox and Safari, and it's fully functional. The Windows emojis added to the code are seamlessly translated to the MacOS.
 
-### Functions
+### <u>Functions</u>
 Here you'll find a detailed explanation to every function we have created. 
 <br> <br>
+
 ```javascript
 function padNum(){
     let accepted=false;
@@ -80,4 +83,75 @@ function padNum(){
     return n.toString().padStart(variablesList.padOfId.length, '0');
 }
 ```
-This function takes no arguments; inside of it there are declared two variables, 
+This function takes no arguments; two variables are declared: 
+- `accepted` is a boolean that indicates wheter an acceptable ID has been generated
+- `n` is the ID number <br>
+If `variablesList.casualGenerationOfId` is false, the function adds the length of productsList to n.
+If variablesList.casualGenerationOfId is true, the function `generate()`will be invoked.
+The function enters a while loop that keeps running until an acceptable random number is generated (acceptable = unique); this new ID number will be stored into the array `usedId` through the `push` property.
+The function returns he ID number as a string padded with zeros on the left to a length specified by `variablesList.padOfId`.
+
+<br>
+
+```javascript
+ function generate(){
+            let num=Math.floor(Math.random()*(variablesList.numNewProducts*variablesList.weeksUntilEnd)+0);
+    
+            return num;
+        }
+```
+This function returns a random integer number. The variable `num` is defined and its value is set using the `Math.random()` function, which generates a random number between 0 and 1, which is then multiplied by the expression `variablesList.numNewProducts*variablesList.weeksUntilEnd`.
+The `Math.floor()` function is then called on the result of the multiplication to round the number down to the nearest integer.
+
+<br>
+
+```javascript
+function productState(){
+    //declaring an array that contains the statuses that will later be assigned to the items
+    let itemStatus = ['New', 'Valid', 'Old', 'Expired']
+    let d=new Date(initialDate);
+
+    for(let i=0; i<productsList.length; i++){
+        if(productsList[i].countWeek==0){
+            productsList[i].status=itemStatus[0];
+        }
+        else if(productsList[i].countWeek==1){
+            productsList[i].status=itemStatus[1];
+        }
+        else if(productsList[i].countWeek == variablesList.weeksOnShelf){
+
+            productsList[i].status=itemStatus[2];
+        }
+   
+        if(productsList[i].expiryDate<d){
+            productsList[i].status=itemStatus[3];
+        }
+    }
+}
+```
+This function assigns statuses to the items contained in the variable `supermarket`.
+Two variables are declared:
+- `itemStatus = ['New', 'Valid', 'Old', 'Expired']`:  array which contains four strings that represent the statuses that will later be assigned to the items.
+- `d=new Date(initialDate)`: creates a new Date object called d and initializes it with the value of initialDate. <br>
+The for loop iterates through each item in `productsList`. Whithin this for loop there are some conditions:
+- `if(productsList[i].countWeek==1)`checks if the `countWeek` property of the current item is equal to 0. If it is, the status of the item is set to `New`;
+- `if(productsList[i].countWeek==1)`checks if the `countWeek` property of the current item is equal to 1. If it is, the status of the item is set to `Valid`;
+- `if(productsList[i].countWeek == variablesList.weeksOnShelf` checks if the countWeek property of the current product is equal to the value of `weeksOnShelf`. If it is, the status of the product is set to `Old`.
+- `if(productsList[i].expiryDate<d)` checks if the expiryDate property of the current product is less than the `d` date object created earlier in the code. If it is, the status of the product is set to `Expired`. <br>
+Once all the statuses are assigned to the products, the function ends.
+
+<br>
+
+```javascript
+function generateName(){
+    let n=Math.floor(Math.random()*supermarket.length+0);
+
+    let randProd=supermarket[n];
+
+    return randProd;
+}
+```
+This function returns a `String` value.
+It generates a random name starting from the array `supermarket` declared in the `main.js` sheet.
+Using the Math.floor function generates a random number between 0 and the number of items within the `supermarker`string, and then rounds it down if it's a decimal number.
+`let randProd=supermarket[n]` assigns the element of the supermarket array at the random index generated in the previous line to a variable called randProd.
