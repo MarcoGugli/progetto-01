@@ -50,7 +50,7 @@ Under the folder /script you will find several .js files. Here I'll explain how 
 We have tested the code on Chrome, Opera, Edge, Firefox and Safari, and it's fully functional. The Windows emojis added to the code are seamlessly translated to the MacOS.
 
 ### <u>Functions</u>
-Here you'll find a detailed explanation to every function we have created. 
+Here you'll find a detailed explanation to every function we have created.
 <br> <br>
 
 ```javascript
@@ -155,3 +155,52 @@ This function returns a `String` value.
 It generates a random name starting from the array `supermarket` declared in the `main.js` sheet.
 Using the Math.floor function generates a random number between 0 and the number of items within the `supermarker`string, and then rounds it down if it's a decimal number.
 `let randProd=supermarket[n]` assigns the element of the supermarket array at the random index generated in the previous line to a variable called randProd.
+
+<br>
+
+```javascript
+function generateExpiry(){
+    let startDate = new Date(initialDate);
+    let endDate = new Date(startDate); 
+    endDate.setMonth(endDate.getMonth()+1);
+    
+    let randomDate = new Date(startDate.getTime() + Math.random()*(endDate.getTime() - startDate.getTime())+0);
+    
+    return randomDate;
+} 
+```
+This function returns a random `Date` object. 
+Two variables are declared and initilised at the beginning:
+- `let startDate = new Date(initialDate)` sets a starting date
+- `let endDate = new Date(startDate)` sets a final date
+It also increments the month of a date object by 1 using `endDate.setMonth(endDate.getMonth()+1)`.
+Finally, one more variable is declared and initialised:
+- `let randomDate = new Date(startDate.getTime() + Math.random()*(endDate.getTime() - startDate.getTime())+0)` calculates a casual date between the starting date and the ending date declared earlier.
+
+<br>
+
+```javascript
+function generateProduct(){
+    let length=productsList.length;
+    let sum=productsList.length+variablesList.numNewProducts;
+
+    for(let j=0; j<productsList.length; j++){
+        productsList[j].countWeek++;
+    }
+
+    for(let i=length; i<sum; i++){
+        let product={
+            id: padNum(),
+            name: generateName(),
+            expiryDate: generateExpiry(),
+            countWeek: 0
+        };
+
+        productsList.push(product);
+    }
+} 
+```
+This function declares and initialises two variables:
+- `let length=productsList.length` uses the length property of an array to transform it into a number value.
+- `let sum=productsList.length+variablesList.numNewProducts` sums the length of the array to the number of new products (which is a component of the object variablesList)
+Afterwards a for loop starts, which adds a set number of new items

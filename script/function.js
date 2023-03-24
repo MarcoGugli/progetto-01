@@ -45,8 +45,6 @@ function padNum(){
     return n.toString().padStart(variablesList.padOfId.length, '0');
 }
 
-
-
 /**
  * updates the status of the items
  * @name productState
@@ -68,7 +66,6 @@ function productState(){
         else if(productsList[i].countWeek == variablesList.weeksOnShelf){
 
             productsList[i].status=itemStatus[2];
-
         }
    
         if(productsList[i].expiryDate<d){
