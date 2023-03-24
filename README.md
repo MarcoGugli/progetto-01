@@ -203,4 +203,7 @@ function generateProduct(){
 This function declares and initialises two variables:
 - `let length=productsList.length` uses the length property of an array to transform it into a number value.
 - `let sum=productsList.length+variablesList.numNewProducts` sums the length of the array to the number of new products (which is a component of the object variablesList)
-Afterwards a for loop starts, which adds a set number of new items
+Afterwards a for loop starts, which adds a set number of new items. All these items 
+
+## Functionalities
+***

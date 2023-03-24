@@ -160,7 +160,30 @@ function expired(){
  * @return {Date} a date formatted in DD-MMM-YY
  */
 function formattingDate(date){
-    return date.toUTCString().toUpperCase().slice(5,16).replace(/ /g,'-')
+    if(variablesList.dateFormat==1)
+        return date.toUTCString().toUpperCase().slice(5,16).replace(/ /g, variablesList.padDate);
+
+    if(variablesList.dateFormat==2)
+        return date.toUTCString().toUpperCase().slice(0,16).replace(/ /g, variablesList.padDate).replace(variablesList.padDate, ' ');
+
+    if(variablesList.dateFormat==3)
+        return date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getMonth().toString().padStart(2, '0')+variablesList.padDate+date.getFullYear();
+    
+    if(variablesList.dateFormat==4)
+        return date.toUTCString().toUpperCase().slice(8,11)+variablesList.padDate+date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getFullYear();
+    
+    if(variablesList.dateFormat==5)
+        return date.getMonth().toString().padStart(2, '0')+variablesList.padDate+date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getFullYear();
+
+    if(variablesList.dateFormat==6)
+        return date.getFullYear()+variablesList.padDate+date.getMonth().toString().padStart(2, '0')+variablesList.padDate+date.getDate().toString().padStart(2, '0');
+
+    if(variablesList.dateFormat==7)
+        return date.getFullYear()+variablesList.padDate+date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getMonth().toString().padStart(2, '0');
+    /*     
+    if(variablesList.dateFormat==4)
+    if(variablesList.dateFormat==5)
+    if(variablesList.dateFormat==6) */
 }
 
 
@@ -196,13 +219,13 @@ function formatProduct(word) {
  * @return {String} the whole string formatted with padding
  */
 function formatStatus(word) {
-    let pad=variablesList.padding.repeat((10-word.length)/2);
+    let pad=variablesList.padding.repeat((11-word.length)/2);
     let formattedString;
 
     if(word.length%2==0)
         formattedString=pad+word+pad;
     else
-        formattedString=pad+word+pad+variablesList.padding;
+        formattedString=pad+word+pad;
 
     formattedString=formattedString.replace(/ /g, variablesList.padding);
 
@@ -339,3 +362,6 @@ function deleteAll(){
 
 export {padNum, productState, generateName, generateExpiry, generateProduct, expired, formattingDate, formatProduct,
     formatStatus, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, deleteAll};
+
+
+

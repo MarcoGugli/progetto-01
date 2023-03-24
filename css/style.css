@@ -1,3 +1,8 @@
+.container, .name-proj{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 #product-list{
     letter-spacing: 2px;
     font-family: Courier;

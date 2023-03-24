@@ -111,3 +111,14 @@ if(typeOf(variablesList.padding) != string || variablesList.padding.length > 1){
     variablesList.padding = '*';
 
 }
+
+
+// managment of date format
+
+if(variablesList.dateFormat <1 || variablesList.dateFormat >6 || variablesList.dateFormat != /[0-9]/g){
+    console.log("The number has to be between 1 and 6!")
+}
+
+if(variablesList.padDate != "-" && variablesList.padDate != "." && variablesList.padDate != "/") {
+    console.log("You must choose a character between the ones suggested.")
+}
