@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Supermarket</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <form action="index.html" id="myForm">
+      <label for="id">Week on self of every product:</label>
+      <input type="number" min="1" id="wOnS" name="wons">
+    
+      <label for="name">New products of week:</label>
+      <input type="number" min="1" id="newProd" name="newProd"><br>
+
+      <label for="name">Min number of seconds to print output:</label>
+      <input type="number" min="1" id="minNum" name="minNum">
+      
+      <label for="name">Max number of seconds to print output:</label>
+      <input type="number" min="1" id="maxNum" name="maxNum"><br>
+      
+      <label for="name">Week until end of program:</label>
+      <input type="number" min="1" id="weekEnd" name="weekEnd">
+
+      <label for="name">Days to add to the current date:</label>
+      <input type="number" id="daysAdd" name="daysAdd"><br>
+
+      <label for="name">Days until next stamp:</label>
+      <input type="number" min="1" id="daysNext" name="daysNext">
+
+      <label for="name">Padding of product:</label>
+      <input type="text" min="1" id="padding" name="padding"><br>
+
+      <label for="name">Padding of ID:</label>
+      <select name="padNum" id="padNum" required>
+        <option value="none"></option>
+        <option value="00">00</option>
+        <option value="000">000</option>
+        <option value="0000">0000</option>
+        <option value="00000">00000</option>
+
+
+      <button type="submit" id="sub">Submit</button>
+  </form> 
+
+  <table id="product-list"></table>
+
+  <script type="module" src="script/main.js"></script>
+</body>
+
+</html>
