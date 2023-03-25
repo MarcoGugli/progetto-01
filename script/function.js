@@ -1,3 +1,9 @@
+/**
+ * @name function.js
+ * @authors Marco Guglielmino, Luca Laterza, Valeria Cerutti, Lorenzo Garnero
+ * This file stores all the functions we have created
+ */
+
 import { variablesList } from "./variable.js";
 import {supermarket, initialDate, t, productsList, usedId} from "./main.js"
 

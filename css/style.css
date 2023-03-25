@@ -1,3 +1,10 @@
+/**
+ * style.css 
+ * 
+ * This file customises the style of the outputs that are added to the website through the
+ * DOM manipulation in the script/function.js file
+ */
+ 
 .container, .name-proj{
     width: 100%;
     display: flex;

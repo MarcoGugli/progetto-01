@@ -1,3 +1,9 @@
+/**
+ * @name errors.js
+ * @authors Marco Guglielmino, Luca Laterza, Valeria Cerutti, Lorenzo Garnero
+ * This file stores all the possible errors the user can do when compiling the variables.js file
+ */
+
 import {variablesList} from "./variable.js";
 
 

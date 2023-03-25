@@ -1,3 +1,9 @@
+/**
+ * @name main.js
+ * @authors Marco Guglielmino, Luca Laterza, Valeria Cerutti, Lorenzo Garnero
+ * This file holds the array with the items that will we used in the functions, and invokes all the several functions
+ * we have created; these functions are stored in the function.js file
+ */
 
 import { variablesList } from "./variable.js";
 import {padNum, productState, generateName, generateExpiry, generateProduct, expired, formattingDate, 
