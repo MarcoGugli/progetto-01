@@ -203,7 +203,269 @@ function generateProduct(){
 This function declares and initialises two variables:
 - `let length=productsList.length` uses the length property of an array to transform it into a number value.
 - `let sum=productsList.length+variablesList.numNewProducts` sums the length of the array to the number of new products (which is a component of the object variablesList)
-Afterwards a for loop starts, which adds a set number of new items. All these items 
+Afterwards a for loop starts, which adds a set number of new items.
+All these new items are then pushed to the `productsList` array; to each of them other properties are added, such as `id` (from the `padNum` function), `name` (`from the generateName` function), `expiryDate` (from the `generateExpiry` function), and `countWeek` (counter to how many times the item has been seen on the console).
+
+<br>
+
+```javascript
+function expired(){
+    let d=new Date(initialDate);
+    
+    for(let i=0; i<productsList.length; i++){
+
+        if(productsList[i].expiryDate<=d||productsList[i].countWeek>=variablesList.weeksOnShelf){
+            productsList.splice(i,1);
+            i--;
+        }
+    }
+}
+```
+This function checks if the expiry date of each product on the shelf has passed the current date, or if the product has exceeded the amount of time it can be on display on the shelf. If it has, the product is taken away from the array through the `splice()` method.
+
+<br>
+
+```javascript
+function formattingDate(date){
+    if(variablesList.dateFormat==1)
+        return date.toUTCString().toUpperCase().slice(5,16).replace(/ /g, variablesList.padDate);
+
+    if(variablesList.dateFormat==2)
+        return date.toUTCString().toUpperCase().slice(0,16).replace(/ /g, variablesList.padDate).replace(variablesList.padDate, ' ');
+
+    if(variablesList.dateFormat==3)
+        return date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getMonth().toString().padStart(2, '0')+variablesList.padDate+date.getFullYear();
+    
+    if(variablesList.dateFormat==4)
+        return date.toUTCString().toUpperCase().slice(8,11)+variablesList.padDate+date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getFullYear();
+    
+    if(variablesList.dateFormat==5)
+        return date.getMonth().toString().padStart(2, '0')+variablesList.padDate+date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getFullYear();
+
+    if(variablesList.dateFormat==6)
+        return date.getFullYear()+variablesList.padDate+date.getMonth().toString().padStart(2, '0')+variablesList.padDate+date.getDate().toString().padStart(2, '0');
+
+    if(variablesList.dateFormat==7)
+        return date.getFullYear()+variablesList.padDate+date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getMonth().toString().padStart(2, '0');
+}
+```
+This function changes the date format depending on which option the user chooses from the `variablesList.dateFormat` property of the object `variablesList` in the `scripts/variable.js` file. 
+
+<br>
+
+```javascript
+function formatProduct(word) {
+    word=word.charAt(0).toUpperCase()+word.slice(1);
+    let pad=variablesList.padding.repeat((20-word.length)/2);
+    let formattedString;
+
+    if(word.length%2==0)
+        formattedString=pad+word+pad;
+    else
+        formattedString=pad+word+pad+variablesList.padding;
+
+    formattedString=formattedString.replace(/ /g, variablesList.padding);
+
+    return formattedString;
+}
+```
+With this function we get the item from the `supermarket` variable printed to to the console with the desired padding, which is chosen by the user from the `script/variable.js` file. 
+The padding length around each word depends on the word's length itself, as it has to fill the spaces around the word until it gets to a total length of 20 characters. If the length of the word is even, the padding will be equal on both sides, and if the length of the word is off, then the there will be one more character on the right side.
+
+<br>
+
+```javascript
+function formatStatus(word) {
+    let pad=variablesList.padding.repeat((11-word.length)/2);
+    let formattedString;
+
+    if(word.length%2==0)
+        formattedString=pad+word+pad;
+    else
+        formattedString=pad+word+pad;
+
+    formattedString=formattedString.replace(/ /g, variablesList.padding);
+
+    formattedString = styleCommands.stylePath+formattedString;
+
+    return formattedString;
+}
+```
+The logic in this function is the same of the previous one. The chosen padding is added to the status of each item, until the total length of the string is equal to 11.
+The  `stylePath` that can be seen in the `formattedString` variable adds the colour to the status, depending on which one it is. This will be explained later.
+
+<br>
+
+```javascript
+function tableCreator(){
+    let table=document.createElement("table");
+    let container=document.querySelector(".container");
+
+    table.className="product-list";
+    container.appendChild(table);
+}
+```
+This table modifies the DOM through the `querySelector` in the `.container` class, then adds a class to the table, calling it `product-list`.
+The table is then added to the HTML through the `appendChild` method.
+
+<br>
+
+```javascript
+function title(){
+    if(weeklyOutput==0){
+        console.log("Week of "+formattingDate(initialDate));
+        console.log("-----------------------------------------------------------");
+    }
+    else if(weeklyOutput==1){
+        console.log("Filtered");
+        console.log("--------");
+    }
+}
+```
+Adds a different output to the console depending on whether the `weeklyOuput` has already been printed to the console or not.
+If it's the first occurrency, then the `weeklyOuput` will be equal to 0, and if it's the second occurrency, the `weeklyOutput` will be set to 1.
+
+<br>
+
+```javascript
+function titleHtml(){
+    let table=document.getElementsByClassName("product-list");
+    let leng=(table.length)-1;
+    let tr=document.createElement("tr");
+    let tr1=document.createElement("tr");
+    let week=document.createElement("td");
+    let pad=document.createElement("td");
+    tr.className+="title-bold";
+    tr.className+=" align-left";
+    tr1.className+="align-left";
+
+    if(weeklyOutput==0){
+        week.textContent+="Week of "+formattingDate(initialDate);
+        pad.textContent+="--------------------------------------------------------------";
+        week.setAttribute("colspan", 5);
+        pad.setAttribute("colspan", 5);
+
+        tr.appendChild(week);
+        tr1.appendChild(pad);
+        table[leng].appendChild(tr);
+        table[leng].appendChild(tr1);
+        
+    }
+    else if(weeklyOutput==1){
+        week.textContent+="Filtered";
+        pad.textContent+="--------";
+        week.setAttribute("colspan", 5);
+        pad.setAttribute("colspan", 5);
+
+        tr.appendChild(week);
+        tr1.appendChild(pad);
+        table[leng].appendChild(tr);
+        table[leng].appendChild(tr1);
+    }
+}
+```
+As the previous function, this function adds the headers "Week of..." and "Filtered" with their padding to the HTML output through the DOM manipulation methods.
+
+<br>
+
+```javascript
+function formattingOutput(){
+    
+    for(let i=0; i<productsList.length; i++){
+        let color;
+        if(productsList[i].status=="New")
+            color=styleCommands.styleGreen;
+        else if(productsList[i].status=="Valid")
+            color=styleCommands.styleYellow;
+        else if(productsList[i].status=="Old")
+            color=styleCommands.styleOrange;
+        else if(productsList[i].status=="Expired")
+            color=styleCommands.styleRed;    
+        
+        console.log(productsList[i].id+": "+formatProduct(productsList[i].name)+" "+formattingDate(productsList[i].expiryDate)+" "+formatStatus(productsList[i].status), color," [ "+productsList[i].countWeek+" checks ]");
+    }
+}
+```
+This function prints ID number + item name + expiry date + week check + status to the console, through the `console.log()`.
+In addition to this, to each of the statuses of the products is added a variable containing a different colour depending on whether they're new, valid, old or expired.
+
+<br>
+
+```javascript
+function formattingOutputHtml(){
+    let table=document.getElementsByClassName("product-list");
+    let leng=table.length-1;
+    let br=document.createElement("br");
+
+    let titleTr=document.createElement("tr");
+    let titleId=document.createElement("td");
+    let titleName=document.createElement("td");
+    let titleExpiry=document.createElement("td");
+    let titleStatus=document.createElement("td");
+    let titleCheck=document.createElement("td");
+
+    titleId.textContent+="Id";
+    titleName.textContent+="Name";
+    titleExpiry.textContent+="Expiry";
+    titleStatus.textContent+="Status";
+    titleCheck.textContent+="Checks";
+
+    titleTr.appendChild(titleId);
+    titleTr.appendChild(titleName);
+    titleTr.appendChild(titleExpiry);
+    titleTr.appendChild(titleStatus);
+    titleTr.appendChild(titleCheck);
+    titleTr.className+="title-bold";
+    table[leng].appendChild(titleTr);
+
+    for(let i=0; i<productsList.length; i++){
+        
+        let row=document.createElement("tr");
+        let id=document.createElement("td");
+        let name=document.createElement("td");
+        let expiry=document.createElement("td");
+        let status=document.createElement("td");
+        let check=document.createElement("td");
+
+        id.textContent+=productsList[i].id;
+        name.textContent+=formatProduct(productsList[i].name);
+        expiry.textContent+=formattingDate(productsList[i].expiryDate);
+        status.textContent+=formatStatus(productsList[i].status).slice(2);
+        check.textContent+=productsList[i].countWeek+" checks";
+
+        if(productsList[i].status=="New")
+           status.className="new";
+        else if(productsList[i].status=="Valid")
+            status.className="valid";
+        else if(productsList[i].status=="Old")
+            status.className="old";
+        else if(productsList[i].status=="Expired")
+            status.className="expired";
+
+        row.appendChild(id);
+        row.appendChild(name);
+        row.appendChild(expiry);
+        row.appendChild(status);
+        row.appendChild(check);
+        
+        table[leng].appendChild(row);
+        
+    }
+}
+```
+Using the same logic of the previous function, this one prints ID number + item name + expiry date + week check + status to the HTML using the DOM manipulation properties and methods.
+
+<br>
+
+```javascript
+function randomTimestamp(){
+    let rand=Math.floor(Math.random()*variablesList.numSecondsMax+variablesList.numSecondsMin);
+
+    return rand;
+}
+```
+This function makes each output to be printed every N seconds, N being a random number between the numbers `numSecondsMax` and `numSecondsMin` determined by the user in the `/script/variable.js` file.
+
 
 ## Functionalities
 ***

@@ -22,7 +22,7 @@ let initialDate= new Date();
 initialDate.setDate(initialDate.getDate()+variablesList.daysSinceToday);
 let usedId=[];
 
-let t;
+let weeklyOutput;
 
 /*================================================================*/
 /* CONSOLE.LOG */
@@ -37,7 +37,7 @@ let rand=randomTimestamp();
 
 let time=setInterval(function(){
 
-    t=0;
+    weeklyOutput=0;
     generateProduct();
     productState();
     tableCreator();
@@ -47,7 +47,7 @@ let time=setInterval(function(){
     formattingOutputHtml()
 
     console.log("\n");
-    t=1;
+    weeklyOutput=1;
     expired();
     title();
     titleHtml();
@@ -69,7 +69,7 @@ setTimeout(function(){
 },(rand*variablesList.weeksUntilEnd)*1000); 
 
 
-export {supermarket, initialDate, t, productsList, usedId};
+export {supermarket, initialDate, weeklyOutput, productsList, usedId};
 
 
 

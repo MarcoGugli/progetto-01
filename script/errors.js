@@ -39,7 +39,7 @@ if((variablesList.numNewProducts*variablesList.weeksUntilEnd).toString().length>
 
 if(variablesList.weeksOnShelf <= 1 || variablesList.weeksOnShelf != /[0-9]/g){
 
-    console.log("The number of weeks can't be lower than 1. number of weeks is now set as 1 as default");
+    console.log("The number of weeks can'weeklyOutput be lower than 1. number of weeks is now set as 1 as default");
 
     variablesList.weeksOnShelf = 1;
 
@@ -58,7 +58,7 @@ if((variablesList.numSecondsMin < 0 || variablesList.numSecondsMin != /[0-9]/g) 
 
     if(variablesList.numSecondsMin > variablesList.numSecondsMax){
 
-        console.log("the minor delay can't be higher than greater delay. Minor delay is now set as 1 and greater is set as 2 as default");
+        console.log("the minor delay can'weeklyOutput be higher than greater delay. Minor delay is now set as 1 and greater is set as 2 as default");
 
         variablesList.numSecondsMin = 1;
         variablesList.numSecondsMax = 2;

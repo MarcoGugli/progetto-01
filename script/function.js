@@ -1,11 +1,11 @@
   /**
- * @name function.js
- * @authors Marco Guglielmino, Luca Laterza, Valeria Cerutti, Lorenzo Garnero
- * This file stores all the functions we have created
- */
+  * @name function.js
+  * @authors Marco Guglielmino, Luca Laterza, Valeria Cerutti, Lorenzo Garnero
+  * This file stores all the functions we have created
+  */
 
 import { variablesList} from "./variable.js";
-import {supermarket, initialDate, t, productsList, usedId} from "./main.js"
+import {supermarket, initialDate, weeklyOutput, productsList, usedId} from "./main.js"
 
 let styleCommands = {
 
@@ -104,7 +104,6 @@ function generateName(){
     return randProd;
 }
 
-
 /**
  * generates an expiry date to each of the products from the string "supermarket"
  * @name generateExpiry
@@ -120,7 +119,6 @@ function generateExpiry(){
     
     return randomDate;
 } 
-
 
 /**
  * generates the items to add to the shelf the next week. the number of items added to the shelf
@@ -149,7 +147,6 @@ function generateProduct(){
     }
 } 
 
-
 /**
  * checks if the articles of the shelf are either valid or expired, 
  * depending on the expiry date generated in the function "generateExpiry"
@@ -167,7 +164,6 @@ function expired(){
         }
     }
 }
-
 
 /**
  * formats the date to the format DD-MMM-YY
@@ -198,7 +194,6 @@ function formattingDate(date){
         return date.getFullYear()+variablesList.padDate+date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getMonth().toString().padStart(2, '0');
 }
 
-
 /**
  * generates the item surrounded with the desired padding -- this padding depends on the
  * variable "padding", which is customisable
@@ -221,13 +216,11 @@ function formatProduct(word) {
     return formattedString;
 }
 
-
-//funzione che formatta la stringa dello status aggiungendo il padding desiderato
 /**
  * formats the status string adding the desired padding - the padding 
  * depends on the variable "padding", which is customisable
  * @name formatStatus
- * @param {String} the status of each item
+ * @param {String} status of each item
  * @return {String} the whole string formatted with padding
  */
 function formatStatus(word) {
@@ -246,6 +239,11 @@ function formatStatus(word) {
     return formattedString;
 }
 
+/**
+ * @name tableCreator
+ * @param
+ * Creates a table to the index.html
+ */
 function tableCreator(){
     let table=document.createElement("table");
     let container=document.querySelector(".container");
@@ -254,17 +252,29 @@ function tableCreator(){
     container.appendChild(table);
 }
 
+/**
+ * @name title
+ * @param
+ * adds the headers "week of ..." and "filtered" with their own separators
+ * to the console output
+ */
 function title(){
-    if(t==0){
+    if(weeklyOutput==0){
         console.log("Week of "+formattingDate(initialDate));
         console.log("-----------------------------------------------------------");
     }
-    else if(t==1){
+    else if(weeklyOutput==1){
         console.log("Filtered");
         console.log("--------");
     }
 }
 
+/**
+ * @name titleHtml
+ * @param
+ * adds the headers "week of ..." and "filtered" with their own separators
+ * to the html output
+ */
 function titleHtml(){
     let table=document.getElementsByClassName("product-list");
     let leng=(table.length)-1;
@@ -276,7 +286,7 @@ function titleHtml(){
     tr.className+=" align-left";
     tr1.className+="align-left";
 
-    if(t==0){
+    if(weeklyOutput==0){
         week.textContent+="Week of "+formattingDate(initialDate);
         pad.textContent+="--------------------------------------------------------------";
         week.setAttribute("colspan", 5);
@@ -288,7 +298,7 @@ function titleHtml(){
         table[leng].appendChild(tr1);
         
     }
-    else if(t==1){
+    else if(weeklyOutput==1){
         week.textContent+="Filtered";
         pad.textContent+="--------";
         week.setAttribute("colspan", 5);
@@ -305,13 +315,12 @@ function titleHtml(){
 
 
 /**
- * outputs id number + item name + expiry date + week check 
  * @name formattingOutput
  * @param {void}
+ * outputs id number + item name + expiry date + week check 
  */
 function formattingOutput(){
-    
-    //questo console log ha il colore modificabile (vedere fondo linea)
+
     for(let i=0; i<productsList.length; i++){
         let color;
         if(productsList[i].status=="New")
@@ -327,7 +336,11 @@ function formattingOutput(){
     }
 }
 
-
+/**
+ * @name formattingOutputHtml
+ * @param
+ * outputs id number + item name + expiry date + week check to the HTML
+ */
 function formattingOutputHtml(){
     let table=document.getElementsByClassName("product-list");
     let leng=table.length-1;
@@ -389,7 +402,12 @@ function formattingOutputHtml(){
     }
 }
 
-
+/**
+ * @name randomTimestamp
+ * @param
+ * @returns {Number}
+ * Prints the outputs every n seconds, n being a casual number between two set numbers 
+ */
 function randomTimestamp(){
     let rand=Math.floor(Math.random()*variablesList.numSecondsMax+variablesList.numSecondsMin);
 
