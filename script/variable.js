@@ -46,4 +46,16 @@ let variablesList = {
     //padding between each component of the date; choose between the following: "-"  "."  "/"
     padDate: '-' 
 }
-export {variablesList};
+
+let styleCommands = {
+
+    stylePath: "%c",
+    styleRed: "color: red",
+    styleYellow: "color: yellow",
+    styleOrange: "color: orange",
+    styleGreen: "color: green"
+
+}
+
+
+export {variablesList, styleCommands};

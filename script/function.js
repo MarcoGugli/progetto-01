@@ -1,10 +1,10 @@
-/**
+  /**
  * @name function.js
  * @authors Marco Guglielmino, Luca Laterza, Valeria Cerutti, Lorenzo Garnero
  * This file stores all the functions we have created
  */
 
-import { variablesList } from "./variable.js";
+import { variablesList, styleCommands } from "./variable.js";
 import {supermarket, initialDate, t, productsList, usedId} from "./main.js"
 
 /**
@@ -235,7 +235,17 @@ function formatStatus(word) {
 
     formattedString=formattedString.replace(/ /g, variablesList.padding);
 
+    formattedString = styleCommands.stylePath+formattedString;
+
     return formattedString;
+}
+
+function tableCreator(){
+    let table=document.createElement("table");
+    let container=document.querySelector(".container");
+
+    table.className="product-list";
+    container.appendChild(table);
 }
 
 function title(){
@@ -250,7 +260,8 @@ function title(){
 }
 
 function titleHtml(){
-    let table=document.getElementById("product-list");
+    let table=document.getElementsByClassName("product-list");
+    let leng=(table.length)-1;
     let tr=document.createElement("tr");
     let tr1=document.createElement("tr");
     let week=document.createElement("td");
@@ -267,8 +278,8 @@ function titleHtml(){
 
         tr.appendChild(week);
         tr1.appendChild(pad);
-        table.appendChild(tr);
-        table.appendChild(tr1);
+        table[leng].appendChild(tr);
+        table[leng].appendChild(tr1);
         
     }
     else if(t==1){
@@ -279,8 +290,8 @@ function titleHtml(){
 
         tr.appendChild(week);
         tr1.appendChild(pad);
-        table.appendChild(tr);
-        table.appendChild(tr1);
+        table[leng].appendChild(tr);
+        table[leng].appendChild(tr1);
     }
 }
 
@@ -296,13 +307,24 @@ function formattingOutput(){
     
     //questo console log ha il colore modificabile (vedere fondo linea)
     for(let i=0; i<productsList.length; i++){
-        console.log(productsList[i].id+": "+formatProduct(productsList[i].name)+" "+formattingDate(productsList[i].expiryDate)+" "+formatStatus(productsList[i].status)+" [ "+productsList[i].countWeek+" checks ]");
+        let color;
+        if(productsList[i].status=="New")
+            color=styleCommands.styleGreen;
+        else if(productsList[i].status=="Valid")
+            color=styleCommands.styleYellow;
+        else if(productsList[i].status=="Old")
+            color=styleCommands.styleOrange;
+        else if(productsList[i].status=="Expired")
+            color=styleCommands.styleRed;    
+        
+        console.log(productsList[i].id+": "+formatProduct(productsList[i].name)+" "+formattingDate(productsList[i].expiryDate)+" "+formatStatus(productsList[i].status), color," [ "+productsList[i].countWeek+" checks ]");
     }
 }
 
 
 function formattingOutputHtml(){
-    let table=document.getElementById("product-list");
+    let table=document.getElementsByClassName("product-list");
+    let leng=table.length-1;
     let br=document.createElement("br");
 
     let titleTr=document.createElement("tr");
@@ -324,10 +346,11 @@ function formattingOutputHtml(){
     titleTr.appendChild(titleStatus);
     titleTr.appendChild(titleCheck);
     titleTr.className+="title-bold";
-    table.appendChild(titleTr);
+    table[leng].appendChild(titleTr);
 
     for(let i=0; i<productsList.length; i++){
-        let tr=document.createElement("tr");
+        
+        let row=document.createElement("tr");
         let id=document.createElement("td");
         let name=document.createElement("td");
         let expiry=document.createElement("td");
@@ -337,21 +360,27 @@ function formattingOutputHtml(){
         id.textContent+=productsList[i].id;
         name.textContent+=formatProduct(productsList[i].name);
         expiry.textContent+=formattingDate(productsList[i].expiryDate);
-        status.textContent+=formatStatus(productsList[i].status);
+        status.textContent+=formatStatus(productsList[i].status).slice(2);
         check.textContent+=productsList[i].countWeek+" checks";
-        
-        tr.appendChild(id);
-        tr.appendChild(name);
-        tr.appendChild(expiry);
-        tr.appendChild(status);
-        tr.appendChild(check);
-        
-        table.appendChild(tr);
-        
 
+        if(productsList[i].status=="New")
+           status.className="new";
+        else if(productsList[i].status=="Valid")
+            status.className="valid";
+        else if(productsList[i].status=="Old")
+            status.className="old";
+        else if(productsList[i].status=="Expired")
+            status.className="expired";
+
+        row.appendChild(id);
+        row.appendChild(name);
+        row.appendChild(expiry);
+        row.appendChild(status);
+        row.appendChild(check);
+        
+        table[leng].appendChild(row);
+        
     }
-    table.appendChild(br);
-    table.appendChild(br);
 }
 
 
@@ -367,7 +396,7 @@ function deleteAll(){
 
 
 export {padNum, productState, generateName, generateExpiry, generateProduct, expired, formattingDate, formatProduct,
-    formatStatus, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, deleteAll};
+    formatStatus, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, deleteAll, tableCreator};
 
 
 

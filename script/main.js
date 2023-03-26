@@ -7,7 +7,7 @@
 
 import { variablesList } from "./variable.js";
 import {padNum, productState, generateName, generateExpiry, generateProduct, expired, formattingDate, 
-    formatProduct, formatStatus, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, deleteAll} from "./function.js";
+    formatProduct, formatStatus, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, deleteAll, tableCreator} from "./function.js";
 
 /** CREAZIONE VARIABILI */
 
@@ -45,6 +45,7 @@ let time=setInterval(function(){
     t=0;
     generateProduct();
     productState();
+    tableCreator();
     title();
     titleHtml();
     formattingOutput();
