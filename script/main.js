@@ -6,8 +6,7 @@
  */
 
 import { variablesList } from "./variable.js";
-import {padNum, productState, generateName, generateExpiry, generateProduct, expired, formattingDate, 
-    formatProduct, formatStatus, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, deleteAll, tableCreator} from "./function.js";
+import { productState, generateProduct, expired, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, tableCreator} from "./function.js";
 
 /** CREAZIONE VARIABILI */
 
@@ -27,9 +26,6 @@ let t;
 
 /*================================================================*/
 /* CONSOLE.LOG */
-function prova(){
-   
-}
 
 /**
  * outputs on console each weekly list of items every second
@@ -38,7 +34,6 @@ function prova(){
  */
 let rand=randomTimestamp();
 
-prova();
 
 let time=setInterval(function(){
 

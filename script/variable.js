@@ -8,7 +8,7 @@
 
 //Variables that can be set by the manager
 let variablesList = {
-
+    wantHTMLprint: false,
     /* Choose whethere you want the ID to be casually generated or not. 
      * "false"=the ID will be non-randomically generated; "true"=ID will be randomically generated */
     casualGenerationOfId: true,
@@ -47,15 +47,5 @@ let variablesList = {
     padDate: '-' 
 }
 
-let styleCommands = {
 
-    stylePath: "%c",
-    styleRed: "color: red",
-    styleYellow: "color: yellow",
-    styleOrange: "color: orange",
-    styleGreen: "color: green"
-
-}
-
-
-export {variablesList, styleCommands};
+export {variablesList};

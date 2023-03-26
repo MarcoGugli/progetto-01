@@ -4,8 +4,18 @@
  * This file stores all the functions we have created
  */
 
-import { variablesList, styleCommands } from "./variable.js";
+import { variablesList} from "./variable.js";
 import {supermarket, initialDate, t, productsList, usedId} from "./main.js"
+
+let styleCommands = {
+
+    stylePath: "%c",
+    styleRed: "color: red",
+    styleYellow: "color: yellow",
+    styleOrange: "color: orange",
+    styleGreen: "color: green"
+
+}
 
 /**
  * adds the 0-padding to the ID code of each item. this function also checks that every new item has a 
@@ -186,10 +196,6 @@ function formattingDate(date){
 
     if(variablesList.dateFormat==7)
         return date.getFullYear()+variablesList.padDate+date.getDate().toString().padStart(2, '0')+variablesList.padDate+date.getMonth().toString().padStart(2, '0');
-    /*     
-    if(variablesList.dateFormat==4)
-    if(variablesList.dateFormat==5)
-    if(variablesList.dateFormat==6) */
 }
 
 
@@ -390,13 +396,7 @@ function randomTimestamp(){
     return rand;
 }
 
-function deleteAll(){
-    document.getElementById("product-list").textContent = "";
-}
-
-
-export {padNum, productState, generateName, generateExpiry, generateProduct, expired, formattingDate, formatProduct,
-    formatStatus, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, deleteAll, tableCreator};
+export { productState, generateProduct, expired, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, tableCreator};
 
 
 

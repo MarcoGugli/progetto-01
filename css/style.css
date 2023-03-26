@@ -4,13 +4,18 @@
  * This file customises the style of the outputs that are added to the website through the
  * DOM manipulation in the script/function.js file
  */
- 
+ *{
+    font-family: Courier;
+    box-sizing: border-box;
+ }
+
  body{
     background-color: rgb(53, 53, 53);
  }
  
  h1{
     color: rgb(250, 249, 245);
+    font-size: 50px;
  }
 
 .container, .name-proj{
@@ -22,7 +27,6 @@
 
 .product-list{
     letter-spacing: 2px;
-    font-family: Courier;
     text-align: center;
     background-color:rgb(250, 249, 245);
     border-radius: 10px;
@@ -37,7 +41,8 @@ td{
 }
 
 .title-bold{
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: 20px;
 }
 
 .align-left{
