@@ -229,9 +229,9 @@ function formatStatus(word) {
 }
 
 /**
+ * Creates a table to the index.html
  * @name tableCreator
  * @param
- * Creates a table to the index.html
  */
 function tableCreator(){
     let table=document.createElement("table");
@@ -244,10 +244,10 @@ function tableCreator(){
 
 function generateOutputConsole(){
     /**
-     * @name title
-     * @param
      * adds the headers "week of ..." and "filtered" with their own separators
      * to the console output
+     * @name title
+     * @param
      */
     function title(){
         if(allVariable.weeklyOutput==0){
@@ -261,9 +261,9 @@ function generateOutputConsole(){
     }
 
     /**
+     * outputs id number + item name + expiry date + week check 
      * @name formattingOutput
      * @param {void}
-     * outputs id number + item name + expiry date + week check 
      */
     function formattingOutput(){
 
@@ -285,13 +285,17 @@ function generateOutputConsole(){
     return [title(), formattingOutput()];
 }
 
-
+/**
+ * Generates the whole HTML output
+ * @name generateOutputHTML
+ * @returns 
+ */
 function generateOutputHTML(){  
     /**
-     * @name titleHtml
-     * @param
      * adds the headers "week of ..." and "filtered" with their own separators
      * to the html output
+     * @name titleHtml
+     * @param
      */
     function titleHtml(){
         let table=document.getElementsByClassName("product-list");
