@@ -48,4 +48,32 @@ let variablesList = {
 }
 
 
-export {variablesList};
+
+
+
+
+/* !!! VARIABLES NOT CONFIGURABLE  */
+let allVariable={
+    //array contenente i prodotti
+    supermarket: ["milk", "eggs", "bread", "cheese", "yogurt", "cereal", "pasta", "rice", "beans", "peanut butter", "jelly", "canned tomatoes", "frozen vegetables", "frozen pizza", "frozen dinners", "ground beef", "chicken breasts", "salmon", "tuna", "apples", "oranges", "bananas", "strawberries", "blueberries", "grapes", "carrots", "broccoli", "lettuce", "potatoes", "onions"],
+
+    styleCommands:{
+
+        stylePath: "%c",
+        styleExpired: "color: red",
+        styleValid: "color: yellow",
+        styleOld: "color: orange",
+        styleNew: "color: green"
+    
+    },
+
+    productsList:[], //lista prodotti inseriti
+    initialDate: new Date(),
+    usedId:[],
+    weeklyOutput: 0,
+    time: 0,
+}
+
+allVariable.initialDate.setDate(allVariable.initialDate.getDate()+variablesList.daysSinceToday);
+
+export {variablesList, allVariable};

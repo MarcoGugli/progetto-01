@@ -4,15 +4,11 @@
  * This file stores all the possible errors the user can do when compiling the variables.js file
  */
 
-import { variablesList } from "./variable.js";
-import { styleCommands } from "./main.js";
-import { time } from "./main.js";
+import { variablesList, allVariable } from "./variable.js";
 
 let cont=0;
 
-let createDiv=document.createElement("div");
-let createP=document.createElement("p");
-let body=document.body;
+
 
 /**
  * @name errors
@@ -26,9 +22,12 @@ function errors(){
 
     if(variablesList.casualGenerationOfId != false && variablesList.casualGenerationOfId != true){
 
-        console.log(styleCommands.stylePath+"⛔ 'casualGeneration' can be only a boolean value", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ 'casualGeneration' can be only a boolean value", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ 'casualGeneration' can be only a boolean value";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -41,9 +40,12 @@ function errors(){
 
     if(typeof(variablesList.padOfId) != 'string'){
 
-        console.log(styleCommands.stylePath+"⛔ 'paddingOfId' can be only a string", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ 'paddingOfId' can be only a string", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ 'paddingOfId' can be only a string";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -54,9 +56,12 @@ function errors(){
 
     if((variablesList.numNewProducts*variablesList.weeksUntilEnd).toString().length>variablesList.padOfId.length){
         
-        console.log(styleCommands.stylePath+"⛔ The number of products to insert exceeds the maximum capacity of the ids", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ The number of products to insert exceeds the maximum capacity of the ids", allVariable.styleCommands.styleExpired);
            
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ The number of products to insert exceeds the maximum capacity of the ids";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -69,9 +74,12 @@ function errors(){
 
     if(variablesList.weeksOnShelf < 1 || typeof(variablesList.weeksOnShelf) == 'string'){
 
-        console.log(styleCommands.stylePath+"⛔ The number of weeks can't be lower than 1 or a string", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ The number of weeks can't be lower than 1 or a string", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ The number of weeks can't be lower than 1 or a string";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -84,9 +92,12 @@ function errors(){
 
     if(variablesList.numNewProducts < 1 || typeof(variablesList.numNewProducts) == 'string'){
 
-        console.log(styleCommands.stylePath+"⛔ The number of new products added to the shelf has to be at least 1 or a string", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ The number of new products added to the shelf has to be at least 1 or a string", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ The number of new products added to the shelf has to be at least 1 or a string";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -100,9 +111,12 @@ function errors(){
     if((variablesList.numSecondsMin < 0 || typeof(variablesList.numSecondsMin) == 'string') || (variablesList.numSecondsMax < 0 || typeof(variablesList.numSecondsMax) == 'string')){
 
         
-        console.log(styleCommands.stylePath+"⛔ Delay value is incorrect!", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ Delay value is incorrect!", allVariable.styleCommands.styleExpired);
             
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ Delay value is incorrect!";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -112,9 +126,12 @@ function errors(){
     }
     else if(variablesList.numSecondsMin > variablesList.numSecondsMax){
 
-            console.log(styleCommands.stylePath+"⛔ The minor delay can't be higher than greater delay", styleCommands.styleExpired);
+            console.log(allVariable.styleCommands.stylePath+"⛔ The minor delay can't be higher than greater delay", allVariable.styleCommands.styleExpired);
 
             if(variablesList.wantHTMLprint==true){
+                let createDiv=document.createElement("div");
+                let createP=document.createElement("p");
+                let body=document.body;
                 createP.textContent="⛔ The minor delay can't be higher than greater delay";
                 createDiv.appendChild(createP);
                 body.appendChild(createDiv);
@@ -127,9 +144,12 @@ function errors(){
 
     if(variablesList.weeksUntilEnd < 1 || typeof(variablesList.weeksUntilEnd) == 'string'){
 
-        console.log(styleCommands.stylePath+"⛔ 'weeksUntilEnd' value is incorrect!", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ 'weeksUntilEnd' value is incorrect!", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ 'weeksUntilEnd' value is incorrect!";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -142,9 +162,12 @@ function errors(){
 
     if(typeof(variablesList.daysSinceToday) == 'string'){
 
-        console.log(styleCommands.stylePath+"⛔ 'daysSinceToday' must be a number!", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ 'daysSinceToday' must be a number!", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ 'daysSinceToday' must be a number!";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -157,9 +180,12 @@ function errors(){
 
     if(variablesList.daysUntilNextStamp < 1 || typeof(variablesList.daysUntilNextStamp) == 'string'){
 
-        console.log(styleCommands.stylePath+"⛔ 'daysUntilNextStamp' value is incorrect!", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ 'daysUntilNextStamp' value is incorrect!", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ 'daysUntilNextStamp' value is incorrect!";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -173,9 +199,12 @@ function errors(){
 
     if( variablesList.padding.length > 1 || typeof(variablesList.padding) != 'string'){
 
-        console.log(styleCommands.stylePath+"⛔ 'padding' value is incorrect!", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ 'padding' value is incorrect!", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ 'padding' value is incorrect!";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -188,9 +217,12 @@ function errors(){
 
     if(variablesList.dateFormat <1 || variablesList.dateFormat >6 || typeof(variablesList.dateFormat) == 'string'){
 
-        console.log(styleCommands.stylePath+"⛔ The number of format date has to be between 1 and 6 or a string!", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ The number of format date has to be between 1 and 6 or a string!", allVariable.styleCommands.styleExpired);
         
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ The number of format date has to be between 1 and 6 or a string!";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -201,9 +233,12 @@ function errors(){
 
     if(variablesList.padDate != "-" && variablesList.padDate != "." && variablesList.padDate != "/") {
 
-        console.log(styleCommands.stylePath+"⛔ You must choose a character between the ones suggested", styleCommands.styleExpired);
+        console.log(allVariable.styleCommands.stylePath+"⛔ You must choose a character between the ones suggested", allVariable.styleCommands.styleExpired);
 
         if(variablesList.wantHTMLprint==true){
+            let createDiv=document.createElement("div");
+            let createP=document.createElement("p");
+            let body=document.body;
             createP.textContent="⛔ You must choose a character between the ones suggested";
             createDiv.appendChild(createP);
             body.appendChild(createDiv);
@@ -213,7 +248,7 @@ function errors(){
 
     if(cont==1){
         setTimeout(function(){
-            clearTimeout(time);
+            clearTimeout(allVariable.time);
         },500); 
     }
 }

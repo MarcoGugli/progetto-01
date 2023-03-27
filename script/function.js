@@ -4,8 +4,7 @@
   * This file stores all the functions we have created
   */
 
-import { variablesList} from "./variable.js";
-import {supermarket, initialDate, weeklyOutput, productsList, usedId, styleCommands} from "./main.js"
+import { variablesList, allVariable} from "./variable.js";
 
 /**
  * adds the 0-padding to the ID code of each item. this function also checks that every new item has a 
@@ -21,7 +20,7 @@ function padNum(){
     let n=0;
 
     if(variablesList.casualGenerationOfId==false){
-       n+=productsList.length;
+       n+=allVariable.productsList.length;
     }
     else if(variablesList.casualGenerationOfId==true){
 /**
@@ -39,11 +38,11 @@ function padNum(){
         while(accepted==false){
             n=generate();
     
-            if(usedId.indexOf(n)>=0)
+            if(allVariable.usedId.indexOf(n)>=0)
                 n=generate();
             else{
                 accepted=true;
-                usedId.push(n);
+                allVariable.usedId.push(n);
             }
         }    
     }
@@ -60,48 +59,48 @@ function padNum(){
 function productState(){
     //declaring an array that contains the statuses that will later be assigned to the items
     let itemStatus = ['New', 'Valid', 'Old', 'Expired']
-    let d=new Date(initialDate);
+    let d=new Date(allVariable.initialDate);
 
-    for(let i=0; i<productsList.length; i++){
-        if(productsList[i].countWeek==0){
-            productsList[i].status=itemStatus[0];
+    for(let i=0; i<allVariable.productsList.length; i++){
+        if(allVariable.productsList[i].countWeek==0){
+            allVariable.productsList[i].status=itemStatus[0];
         }
-        else if(productsList[i].countWeek==1){
-            productsList[i].status=itemStatus[1];
+        else if(allVariable.productsList[i].countWeek==1){
+            allVariable.productsList[i].status=itemStatus[1];
         }
-        else if(productsList[i].countWeek == variablesList.weeksOnShelf){
+        else if(allVariable.productsList[i].countWeek == variablesList.weeksOnShelf){
 
-            productsList[i].status=itemStatus[2];
+            allVariable.productsList[i].status=itemStatus[2];
         }
    
-        if(productsList[i].expiryDate<d){
-            productsList[i].status=itemStatus[3];
+        if(allVariable.productsList[i].expiryDate<d){
+            allVariable.productsList[i].status=itemStatus[3];
         }
     }
 }
 
 /** 
- * generates a random item from the string "supermarket"
+ * generates a random item from the string "allVariable.supermarket"
  * @name generateName
  * @param {void} void
- * @return {String} random product fom the string "supermarket"
+ * @return {String} random product fom the string "allVariable.supermarket"
  */
 function generateName(){
-    let n=Math.floor(Math.random()*supermarket.length+0);
+    let n=Math.floor(Math.random()*allVariable.supermarket.length+0);
 
-    let randProd=supermarket[n];
+    let randProd=allVariable.supermarket[n];
 
     return randProd;
 }
 
 /**
- * generates an expiry date to each of the products from the string "supermarket"
+ * generates an expiry date to each of the products from the string "allVariable.supermarket"
  * @name generateExpiry
  * @param {void} void
  * @return {Date} random expiry date
  */   
 function generateExpiry(){
-    let startDate = new Date(initialDate); // imposta la data di inizio
+    let startDate = new Date(allVariable.initialDate); // imposta la data di inizio
     let endDate = new Date(startDate); // imposta la data di fine
     endDate.setMonth(endDate.getMonth()+1);
     
@@ -118,11 +117,11 @@ function generateExpiry(){
  * @return {String}
  */
 function generateProduct(){
-    let length=productsList.length;
-    let sum=productsList.length+variablesList.numNewProducts;
+    let length=allVariable.productsList.length;
+    let sum=allVariable.productsList.length+variablesList.numNewProducts;
 
-    for(let j=0; j<productsList.length; j++){
-        productsList[j].countWeek++;
+    for(let j=0; j<allVariable.productsList.length; j++){
+        allVariable.productsList[j].countWeek++;
     }
 
     for(let i=length; i<sum; i++){
@@ -133,7 +132,7 @@ function generateProduct(){
             countWeek: 0
         };
 
-        productsList.push(product);
+        allVariable.productsList.push(product);
     }
 } 
 
@@ -144,12 +143,12 @@ function generateProduct(){
  * @param {void}
  */
 function expired(){
-    let d=new Date(initialDate);
+    let d=new Date(allVariable.initialDate);
     
-    for(let i=0; i<productsList.length; i++){
+    for(let i=0; i<allVariable.productsList.length; i++){
 
-        if(productsList[i].expiryDate<=d||productsList[i].countWeek>=variablesList.weeksOnShelf){
-            productsList.splice(i,1);
+        if(allVariable.productsList[i].expiryDate<=d||allVariable.productsList[i].countWeek>=variablesList.weeksOnShelf){
+            allVariable.productsList.splice(i,1);
             i--;
         }
     }
@@ -188,7 +187,7 @@ function formattingDate(date){
  * generates the item surrounded with the desired padding -- this padding depends on the
  * variable "padding", which is customisable
  * @name formatProduct
- * @param {String} item from the string "supermarket"
+ * @param {String} item from the string "allVariable.supermarket"
  * @return {String} item surrounded with the desired padding
  */
 function formatProduct(word) {
@@ -224,7 +223,7 @@ function formatStatus(word) {
 
     formattedString=formattedString.replace(/ /g, variablesList.padding);
 
-    formattedString = styleCommands.stylePath+formattedString;
+    formattedString = allVariable.styleCommands.stylePath+formattedString;
 
     return formattedString;
 }
@@ -251,11 +250,11 @@ function genereteOutputConsole(){
      * to the console output
      */
     function title(){
-        if(weeklyOutput==0){
-            console.log("Week of "+formattingDate(initialDate));
+        if(allVariable.weeklyOutput==0){
+            console.log("Week of "+formattingDate(allVariable.initialDate));
             console.log("-----------------------------------------------------------");
         }
-        else if(weeklyOutput==1){
+        else if(allVariable.weeklyOutput==1){
             console.log("Filtered");
             console.log("--------");
         }
@@ -268,18 +267,18 @@ function genereteOutputConsole(){
      */
     function formattingOutput(){
 
-        for(let i=0; i<productsList.length; i++){
+        for(let i=0; i<allVariable.productsList.length; i++){
             let color;
-            if(productsList[i].status=="New")
-                color=styleCommands.styleNew;
-            else if(productsList[i].status=="Valid")
-                color=styleCommands.styleValid;
-            else if(productsList[i].status=="Old")
-                color=styleCommands.styleOld;
-            else if(productsList[i].status=="Expired")
-                color=styleCommands.styleExpired;    
+            if(allVariable.productsList[i].status=="New")
+                color=allVariable.styleCommands.styleNew;
+            else if(allVariable.productsList[i].status=="Valid")
+                color=allVariable.styleCommands.styleValid;
+            else if(allVariable.productsList[i].status=="Old")
+                color=allVariable.styleCommands.styleOld;
+            else if(allVariable.productsList[i].status=="Expired")
+                color=allVariable.styleCommands.styleExpired;    
             
-            console.log(productsList[i].id+": "+formatProduct(productsList[i].name)+" "+formattingDate(productsList[i].expiryDate)+" "+formatStatus(productsList[i].status), color," [ "+productsList[i].countWeek+" checks ]");
+            console.log(allVariable.productsList[i].id+": "+formatProduct(allVariable.productsList[i].name)+" "+formattingDate(allVariable.productsList[i].expiryDate)+" "+formatStatus(allVariable.productsList[i].status), color," [ "+allVariable.productsList[i].countWeek+" checks ]");
         }
     }
 
@@ -305,8 +304,8 @@ function genereteOutputHTML(){
         tr.className+=" align-left";
         tr1.className+="align-left";
 
-        if(weeklyOutput==0){
-            week.textContent+="Week of "+formattingDate(initialDate);
+        if(allVariable.weeklyOutput==0){
+            week.textContent+="Week of "+formattingDate(allVariable.initialDate);
             pad.textContent+="--------------------------------------------------------------";
             week.setAttribute("colspan", 5);
             pad.setAttribute("colspan", 5);
@@ -317,7 +316,7 @@ function genereteOutputHTML(){
             table[leng].appendChild(tr1);
             
         }
-        else if(weeklyOutput==1){
+        else if(allVariable.weeklyOutput==1){
             week.textContent+="Filtered";
             pad.textContent+="--------";
             week.setAttribute("colspan", 5);
@@ -361,7 +360,7 @@ function genereteOutputHTML(){
         titleTr.className+="title-bold";
         table[leng].appendChild(titleTr);
 
-        for(let i=0; i<productsList.length; i++){
+        for(let i=0; i<allVariable.productsList.length; i++){
             
             let row=document.createElement("tr");
             let id=document.createElement("td");
@@ -370,19 +369,19 @@ function genereteOutputHTML(){
             let status=document.createElement("td");
             let check=document.createElement("td");
 
-            id.textContent+=productsList[i].id;
-            name.textContent+=formatProduct(productsList[i].name);
-            expiry.textContent+=formattingDate(productsList[i].expiryDate);
-            status.textContent+=formatStatus(productsList[i].status).slice(2);
-            check.textContent+=productsList[i].countWeek+" checks";
+            id.textContent+=allVariable.productsList[i].id;
+            name.textContent+=formatProduct(allVariable.productsList[i].name);
+            expiry.textContent+=formattingDate(allVariable.productsList[i].expiryDate);
+            status.textContent+=formatStatus(allVariable.productsList[i].status).slice(2);
+            check.textContent+=allVariable.productsList[i].countWeek+" checks";
 
-            if(productsList[i].status=="New")
+            if(allVariable.productsList[i].status=="New")
             status.className="new";
-            else if(productsList[i].status=="Valid")
+            else if(allVariable.productsList[i].status=="Valid")
                 status.className="valid";
-            else if(productsList[i].status=="Old")
+            else if(allVariable.productsList[i].status=="Old")
                 status.className="old";
-            else if(productsList[i].status=="Expired")
+            else if(allVariable.productsList[i].status=="Expired")
                 status.className="expired";
 
             row.appendChild(id);
