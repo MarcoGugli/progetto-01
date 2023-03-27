@@ -242,7 +242,7 @@ function tableCreator(){
 }
 
 
-function genereteOutputConsole(){
+function generateOutputConsole(){
     /**
      * @name title
      * @param
@@ -286,7 +286,7 @@ function genereteOutputConsole(){
 }
 
 
-function genereteOutputHTML(){  
+function generateOutputHTML(){  
     /**
      * @name titleHtml
      * @param
@@ -413,5 +413,5 @@ function randomTimestamp(){
     return rand;
 }
 
-export { productState, generateProduct, expired, genereteOutputConsole, genereteOutputHTML, randomTimestamp, tableCreator};
+export { productState, generateProduct, expired, generateOutputConsole, generateOutputHTML, randomTimestamp, tableCreator};
 

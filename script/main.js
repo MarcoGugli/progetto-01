@@ -45,12 +45,12 @@ if(variablesList.wantHTMLprint==false){
         allVariable.weeklyOutput=0;
         func.generateProduct();
         func.productState();
-        func.genereteOutputConsole();
+        func.generateOutputConsole();
 
         console.log("\n");
         allVariable.weeklyOutput=1;
         func.expired();
-        func.genereteOutputConsole();
+        func.generateOutputConsole();
         
         console.log("\n");
         allVariable.initialDate.setDate(allVariable.initialDate.getDate()+variablesList.daysUntilNextStamp);
@@ -74,14 +74,14 @@ else if(variablesList.wantHTMLprint==true){
         func.generateProduct();
         func.productState();
         func.tableCreator();
-        func.genereteOutputConsole();
-        func.genereteOutputHTML();
+        func.generateOutputConsole();
+        func.generateOutputHTML();
 
         console.log("\n");
         allVariable.weeklyOutput=1;
         func.expired();
-        func.genereteOutputConsole();
-        func.genereteOutputHTML();
+        func.generateOutputConsole();
+        func.generateOutputHTML();
         
         console.log("\n");
         allVariable.initialDate.setDate(allVariable.initialDate.getDate()+variablesList.daysUntilNextStamp);    
