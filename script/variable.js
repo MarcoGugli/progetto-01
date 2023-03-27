@@ -8,7 +8,7 @@
 
 //Variables that can be set by the manager
 let variablesList = {
-    wantHTMLprint: false,
+    wantHTMLprint: true,
     /* Choose whethere you want the ID to be casually generated or not. 
      * "false"=the ID will be non-randomically generated; "true"=ID will be randomically generated */
     casualGenerationOfId: true,
@@ -29,7 +29,7 @@ let variablesList = {
     numSecondsMax: 2,
 
     //number of weeks in which the program runs
-    weeksUntilEnd: 10,
+    weeksUntilEnd: 7,
 
     //days since the current date. this variable marks the day in which the program starts running
     daysSinceToday: 7,
@@ -41,7 +41,7 @@ let variablesList = {
     padding: '*',
 
     //choose the format of the date between the following: (1. 18-APR-2023; 2. TUE, 18-APR-2023; 3. 18-04-2023; 4. APR-18-2023; 5. 04-18-2023; 6. 2023-04-18; 7. 2023-18-04)
-    dateFormat: 7,
+    dateFormat: 4,
 
     //padding between each component of the date; choose between the following: "-"  "."  "/"
     padDate: '-' 

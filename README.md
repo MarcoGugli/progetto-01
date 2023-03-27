@@ -7,6 +7,7 @@
 4. [License](#license)
 5. [Standard Use](#standard-use)
 6. [Approach To Solution](#approach-to-solution)
+7. [Functionalities](#functionalities)
 
 ## Exercise Requirement
 ***
@@ -466,6 +467,151 @@ function randomTimestamp(){
 ```
 This function makes each output to be printed every N seconds, N being a random number between the numbers `numSecondsMax` and `numSecondsMin` determined by the user in the `/script/variable.js` file.
 
+<br>
 
+```javascript
+function errors(){
+
+    //management of variable casualGenerationOfId errors
+
+    if(variablesList.casualGenerationOfId != false && variablesList.casualGenerationOfId != true){
+
+        console.log(styleCommands.stylePath+"⛔'casualGeneration' can be only a boolean value.", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    //management of variable padOfId errors
+
+    if(typeof(variablesList.padOfId) != 'string'){
+
+        console.log(styleCommands.stylePath+"⛔'paddingOfId' can be only a string.", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    if((variablesList.numNewProducts*variablesList.weeksUntilEnd).toString().length>variablesList.padOfId.length){
+        
+        console.log(styleCommands.stylePath+"⛔ The number of products to insert exceeds the maximum capacity of the ids", styleCommands.styleExpired);
+           
+        cont=1;
+    }
+
+    // managment of variable weekOnShelf
+
+    if(variablesList.weeksOnShelf <= 1 || typeof(variablesList.weeksOnShelf) == 'string'){
+
+        console.log(styleCommands.stylePath+"⛔The number of weeks can't be lower than 1 or a string.", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    // managment of variable numNewproducts
+
+    if(variablesList.numNewProducts <= 0 || typeof(variablesList.numNewProducts) == 'string'){
+
+        console.log(styleCommands.stylePath+"⛔The number of new products added to the shelf has to be at least 1 or a string.", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    //managment of variable numSecondsMin and numSeconds Max
+
+    if((variablesList.numSecondsMin < 0 || typeof(variablesList.numSecondsMin) == 'string') || (variablesList.numSecondsMax < 0 && typeof(variablesList.numSecondsMax) == 'string')){
+
+        if(variablesList.numSecondsMin > variablesList.numSecondsMax){
+
+            console.log(styleCommands.stylePath+"⛔The minor delay can't be higher than greater delay.", styleCommands.styleExpired);
+
+            cont=1;
+        }
+        else
+        {
+
+            console.log(styleCommands.stylePath+"⛔Delay value is incorrect!.", styleCommands.styleExpired);
+
+            cont=1;
+        }
+
+    }
+
+    // managment of variable weeksUntilEnd
+
+    if(variablesList.weeksUntilEnd < 1 || typeof(variablesList.weeksUntilEnd) == 'string'){
+
+        console.log(styleCommands.stylePath+"⛔'weeksUntilEnd' value is incorrect!.", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    // managment of variable daysSinceToday
+
+    if(typeof(variablesList.daysSinceToday) == 'string'){
+
+        console.log(styleCommands.stylePath+"⛔'daysSinceToday' is must to be a number!", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    // managment of variable daysUntilNextStamp
+
+    if(variablesList.daysUntilNextStamp < 1 && typeof(variablesList.daysUntilNextStamp) == 'string'){
+
+        console.log(styleCommands.stylePath+"⛔'daysUntilNextStamp' value is incorrect!", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    // managment of variable padding
+
+
+    if(typeof(variablesList.padding) != 'string' && variablesList.padding.length > 1){
+
+        console.log(styleCommands.stylePath+"⛔'padding' value is incorrect!.", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    // managment of date format
+
+    if(variablesList.dateFormat <1 && variablesList.dateFormat >6 || typeof(variablesList.numNewProducts) == 'string'){
+
+        console.log(styleCommands.stylePath+"⛔The number of format date has to be between 1 and 6!", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    if(variablesList.padDate != "-" && variablesList.padDate != "." && variablesList.padDate != "/") {
+
+        console.log(styleCommands.stylePath+"⛔You must choose a character between the ones suggested.", styleCommands.styleExpired);
+
+        cont=1;
+    }
+
+    if(cont==1){
+        setTimeout(function(){
+            clearTimeout(time);
+        },500); 
+    }
+}
+```
+This function considers all the errors a user could make while declaring the variables in the variable.js file and outputs a different message depending on which error was done.
+The possible errors are:
+- inserting a not boolean value in the variable `casualGenerationOfId`
+- inserting a value whose `typeof` is different than `string` in the `padOfId` variables
+- the number of products multiplied by the total number of IDs that can be generated exceeds the total number of IDs that can be generated
+- the `weeksOnShelf` variable is less than 1 or its `typeof` is a  string type
+- the `numNewProducts` variable is less than 0 or its `typeof` is a string type
+- the value to the `numSecondsMin` and `numSecondsMax` variables are less than 0 and its `typeof` is a string type; moreover, the `numSecondsMin` has to be smaller than the `numSecondsMax` value
+- the value of `weeksUntilEnd` is less than 1 or its `typeof` is a string
+- 
 ## Functionalities
 ***
+
+- To change the values of the parameters, please go to the sheet `script/variable.js`. Over there you'll find all the customisable variables. Among these, we find
+    - `wantHTMLprint`: you can choose if you want your output printed to the HTML interface by writing "true". By default your output will only be printed to the console.
+    - `casualGenerationOfId`: you can choose whether you want the IDs of the items to be casually generated or not. By typig "true", they will be casually generated, if you type "false" then they will be printed in ascending order.
+    - `padOfId`: you can choose the length of the ID padding; has to be made of 0s.
+    - `weeksOnShelf`: add a numerical value bigger than 0 to determine how many weeks each item will be available on the shelf before being removed.
+    - `numNewProducts`: add a numerical value bigger than 0 to determine how many new items will be added to the shelf before each input.
+    - `numSecondsMin`:

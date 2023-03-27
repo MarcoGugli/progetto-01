@@ -5,17 +5,7 @@
   */
 
 import { variablesList} from "./variable.js";
-import {supermarket, initialDate, weeklyOutput, productsList, usedId} from "./main.js"
-
-let styleCommands = {
-
-    stylePath: "%c",
-    styleRed: "color: red",
-    styleYellow: "color: yellow",
-    styleOrange: "color: orange",
-    styleGreen: "color: green"
-
-}
+import {supermarket, initialDate, weeklyOutput, productsList, usedId, styleCommands} from "./main.js"
 
 /**
  * adds the 0-padding to the ID code of each item. this function also checks that every new item has a 
@@ -252,155 +242,165 @@ function tableCreator(){
     container.appendChild(table);
 }
 
-/**
- * @name title
- * @param
- * adds the headers "week of ..." and "filtered" with their own separators
- * to the console output
- */
-function title(){
-    if(weeklyOutput==0){
-        console.log("Week of "+formattingDate(initialDate));
-        console.log("-----------------------------------------------------------");
-    }
-    else if(weeklyOutput==1){
-        console.log("Filtered");
-        console.log("--------");
-    }
-}
 
-/**
- * @name titleHtml
- * @param
- * adds the headers "week of ..." and "filtered" with their own separators
- * to the html output
- */
-function titleHtml(){
-    let table=document.getElementsByClassName("product-list");
-    let leng=(table.length)-1;
-    let tr=document.createElement("tr");
-    let tr1=document.createElement("tr");
-    let week=document.createElement("td");
-    let pad=document.createElement("td");
-    tr.className+="title-bold";
-    tr.className+=" align-left";
-    tr1.className+="align-left";
-
-    if(weeklyOutput==0){
-        week.textContent+="Week of "+formattingDate(initialDate);
-        pad.textContent+="--------------------------------------------------------------";
-        week.setAttribute("colspan", 5);
-        pad.setAttribute("colspan", 5);
-
-        tr.appendChild(week);
-        tr1.appendChild(pad);
-        table[leng].appendChild(tr);
-        table[leng].appendChild(tr1);
-        
+function genereteOutputConsole(){
+    /**
+     * @name title
+     * @param
+     * adds the headers "week of ..." and "filtered" with their own separators
+     * to the console output
+     */
+    function title(){
+        if(weeklyOutput==0){
+            console.log("Week of "+formattingDate(initialDate));
+            console.log("-----------------------------------------------------------");
+        }
+        else if(weeklyOutput==1){
+            console.log("Filtered");
+            console.log("--------");
+        }
     }
-    else if(weeklyOutput==1){
-        week.textContent+="Filtered";
-        pad.textContent+="--------";
-        week.setAttribute("colspan", 5);
-        pad.setAttribute("colspan", 5);
 
-        tr.appendChild(week);
-        tr1.appendChild(pad);
-        table[leng].appendChild(tr);
-        table[leng].appendChild(tr1);
+    /**
+     * @name formattingOutput
+     * @param {void}
+     * outputs id number + item name + expiry date + week check 
+     */
+    function formattingOutput(){
+
+        for(let i=0; i<productsList.length; i++){
+            let color;
+            if(productsList[i].status=="New")
+                color=styleCommands.styleNew;
+            else if(productsList[i].status=="Valid")
+                color=styleCommands.styleValid;
+            else if(productsList[i].status=="Old")
+                color=styleCommands.styleOld;
+            else if(productsList[i].status=="Expired")
+                color=styleCommands.styleExpired;    
+            
+            console.log(productsList[i].id+": "+formatProduct(productsList[i].name)+" "+formattingDate(productsList[i].expiryDate)+" "+formatStatus(productsList[i].status), color," [ "+productsList[i].countWeek+" checks ]");
+        }
     }
+
+    return [title(), formattingOutput()];
 }
 
 
+function genereteOutputHTML(){  
+    /**
+     * @name titleHtml
+     * @param
+     * adds the headers "week of ..." and "filtered" with their own separators
+     * to the html output
+     */
+    function titleHtml(){
+        let table=document.getElementsByClassName("product-list");
+        let leng=(table.length)-1;
+        let tr=document.createElement("tr");
+        let tr1=document.createElement("tr");
+        let week=document.createElement("td");
+        let pad=document.createElement("td");
+        tr.className+="title-bold";
+        tr.className+=" align-left";
+        tr1.className+="align-left";
 
+        if(weeklyOutput==0){
+            week.textContent+="Week of "+formattingDate(initialDate);
+            pad.textContent+="--------------------------------------------------------------";
+            week.setAttribute("colspan", 5);
+            pad.setAttribute("colspan", 5);
 
-/**
- * @name formattingOutput
- * @param {void}
- * outputs id number + item name + expiry date + week check 
- */
-function formattingOutput(){
+            tr.appendChild(week);
+            tr1.appendChild(pad);
+            table[leng].appendChild(tr);
+            table[leng].appendChild(tr1);
+            
+        }
+        else if(weeklyOutput==1){
+            week.textContent+="Filtered";
+            pad.textContent+="--------";
+            week.setAttribute("colspan", 5);
+            pad.setAttribute("colspan", 5);
 
-    for(let i=0; i<productsList.length; i++){
-        let color;
-        if(productsList[i].status=="New")
-            color=styleCommands.styleGreen;
-        else if(productsList[i].status=="Valid")
-            color=styleCommands.styleYellow;
-        else if(productsList[i].status=="Old")
-            color=styleCommands.styleOrange;
-        else if(productsList[i].status=="Expired")
-            color=styleCommands.styleRed;    
-        
-        console.log(productsList[i].id+": "+formatProduct(productsList[i].name)+" "+formattingDate(productsList[i].expiryDate)+" "+formatStatus(productsList[i].status), color," [ "+productsList[i].countWeek+" checks ]");
+            tr.appendChild(week);
+            tr1.appendChild(pad);
+            table[leng].appendChild(tr);
+            table[leng].appendChild(tr1);
+        }
     }
+
+    /**
+     * @name formattingOutputHtml
+     * @param
+     * outputs id number + item name + expiry date + week check to the HTML
+     */
+    function formattingOutputHtml(){
+        let table=document.getElementsByClassName("product-list");
+        let leng=table.length-1;
+        let br=document.createElement("br");
+
+        let titleTr=document.createElement("tr");
+        let titleId=document.createElement("td");
+        let titleName=document.createElement("td");
+        let titleExpiry=document.createElement("td");
+        let titleStatus=document.createElement("td");
+        let titleCheck=document.createElement("td");
+
+        titleId.textContent+="Id";
+        titleName.textContent+="Name";
+        titleExpiry.textContent+="Expiry";
+        titleStatus.textContent+="Status";
+        titleCheck.textContent+="Checks";
+
+        titleTr.appendChild(titleId);
+        titleTr.appendChild(titleName);
+        titleTr.appendChild(titleExpiry);
+        titleTr.appendChild(titleStatus);
+        titleTr.appendChild(titleCheck);
+        titleTr.className+="title-bold";
+        table[leng].appendChild(titleTr);
+
+        for(let i=0; i<productsList.length; i++){
+            
+            let row=document.createElement("tr");
+            let id=document.createElement("td");
+            let name=document.createElement("td");
+            let expiry=document.createElement("td");
+            let status=document.createElement("td");
+            let check=document.createElement("td");
+
+            id.textContent+=productsList[i].id;
+            name.textContent+=formatProduct(productsList[i].name);
+            expiry.textContent+=formattingDate(productsList[i].expiryDate);
+            status.textContent+=formatStatus(productsList[i].status).slice(2);
+            check.textContent+=productsList[i].countWeek+" checks";
+
+            if(productsList[i].status=="New")
+            status.className="new";
+            else if(productsList[i].status=="Valid")
+                status.className="valid";
+            else if(productsList[i].status=="Old")
+                status.className="old";
+            else if(productsList[i].status=="Expired")
+                status.className="expired";
+
+            row.appendChild(id);
+            row.appendChild(name);
+            row.appendChild(expiry);
+            row.appendChild(status);
+            row.appendChild(check);
+            
+            table[leng].appendChild(row);
+            
+        }
+    }
+
+    return [titleHtml(), formattingOutputHtml()];
+
+
 }
 
-/**
- * @name formattingOutputHtml
- * @param
- * outputs id number + item name + expiry date + week check to the HTML
- */
-function formattingOutputHtml(){
-    let table=document.getElementsByClassName("product-list");
-    let leng=table.length-1;
-    let br=document.createElement("br");
-
-    let titleTr=document.createElement("tr");
-    let titleId=document.createElement("td");
-    let titleName=document.createElement("td");
-    let titleExpiry=document.createElement("td");
-    let titleStatus=document.createElement("td");
-    let titleCheck=document.createElement("td");
-
-    titleId.textContent+="Id";
-    titleName.textContent+="Name";
-    titleExpiry.textContent+="Expiry";
-    titleStatus.textContent+="Status";
-    titleCheck.textContent+="Checks";
-
-    titleTr.appendChild(titleId);
-    titleTr.appendChild(titleName);
-    titleTr.appendChild(titleExpiry);
-    titleTr.appendChild(titleStatus);
-    titleTr.appendChild(titleCheck);
-    titleTr.className+="title-bold";
-    table[leng].appendChild(titleTr);
-
-    for(let i=0; i<productsList.length; i++){
-        
-        let row=document.createElement("tr");
-        let id=document.createElement("td");
-        let name=document.createElement("td");
-        let expiry=document.createElement("td");
-        let status=document.createElement("td");
-        let check=document.createElement("td");
-
-        id.textContent+=productsList[i].id;
-        name.textContent+=formatProduct(productsList[i].name);
-        expiry.textContent+=formattingDate(productsList[i].expiryDate);
-        status.textContent+=formatStatus(productsList[i].status).slice(2);
-        check.textContent+=productsList[i].countWeek+" checks";
-
-        if(productsList[i].status=="New")
-           status.className="new";
-        else if(productsList[i].status=="Valid")
-            status.className="valid";
-        else if(productsList[i].status=="Old")
-            status.className="old";
-        else if(productsList[i].status=="Expired")
-            status.className="expired";
-
-        row.appendChild(id);
-        row.appendChild(name);
-        row.appendChild(expiry);
-        row.appendChild(status);
-        row.appendChild(check);
-        
-        table[leng].appendChild(row);
-        
-    }
-}
 
 /**
  * @name randomTimestamp
@@ -414,7 +414,5 @@ function randomTimestamp(){
     return rand;
 }
 
-export { productState, generateProduct, expired, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, tableCreator};
-
-
+export { productState, generateProduct, expired, genereteOutputConsole, genereteOutputHTML, randomTimestamp, tableCreator};
 
