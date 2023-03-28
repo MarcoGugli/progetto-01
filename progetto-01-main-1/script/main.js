@@ -7,21 +7,7 @@
 
 import { variablesList, allVariable } from "./variable.js";
 import * as func from "./function.js";
-import { errors, cont } from "./errors.js";
-/* { productState, generateProduct, expired, title, titleHtml, formattingOutput, formattingOutputHtml, randomTimestamp, tableCreator} */
-/** CREAZIONE VARIABILI */
-
-//array contenente i prodotti
-
-
-
-
-
-
-
-
-
-
+import { errors } from "./errors.js";
 
 /**
  * outputs on console each weekly list of items every second
@@ -30,15 +16,7 @@ import { errors, cont } from "./errors.js";
  */
 let rand=func.randomTimestamp();
 
-
-
 errors();
-
-if(cont==1){
-    console.log(allVariable.styleCommands.stylePath+"⚠️Check variables in 'variable.js' file⚠️", allVariable.styleCommands.styleValid);
-
-}
-
 
 if(variablesList.wantHTMLprint==false){
     allVariable.time=setInterval(function(){
@@ -62,12 +40,18 @@ if(variablesList.wantHTMLprint==false){
 }
 else if(variablesList.wantHTMLprint==true){
     let createLink=document.createElement("link");
+    let createTitle=document.createElement("h1");
+    let proj=document.querySelector(".name-proj");
     let head=document.head;
+    
 
     createLink.setAttribute("rel", "stylesheet");
     createLink.setAttribute("href", "css/style.css");
+    createTitle.textContent="The Expiry List";
 
     head.appendChild(createLink);
+    proj.appendChild(createTitle);
+
 
     allVariable.time=setInterval(function(){
         allVariable.weeklyOutput=0;

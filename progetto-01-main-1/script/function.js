@@ -310,7 +310,7 @@ function generateOutputHTML(){
 
         if(allVariable.weeklyOutput==0){
             week.textContent+="Week of "+formattingDate(allVariable.initialDate);
-            pad.textContent+="--------------------------------------------------------------";
+            pad.textContent+="--------------------------------------------------------------------------------";
             week.setAttribute("colspan", 5);
             pad.setAttribute("colspan", 5);
 
@@ -322,7 +322,7 @@ function generateOutputHTML(){
         }
         else if(allVariable.weeklyOutput==1){
             week.textContent+="Filtered";
-            pad.textContent+="--------";
+            pad.textContent+="----------";
             week.setAttribute("colspan", 5);
             pad.setAttribute("colspan", 5);
 

@@ -11,7 +11,7 @@ let variablesList = {
     wantHTMLprint: true,
     /* Choose whethere you want the ID to be casually generated or not. 
      * "false"=the ID will be non-randomically generated; "true"=ID will be randomically generated */
-    casualGenerationOfId: true,
+    casualGenerationOfId: false,
 
     //length ID padding, has to be made of 0s
     padOfId: "000",
@@ -20,7 +20,7 @@ let variablesList = {
     weeksOnShelf: 2 ,
 
     //number of new products added to the shelf each week
-    numNewProducts: 10,
+    numNewProducts:10,
 
     //min number of seconds after which the weekly lists are generated
     numSecondsMin: 1,
@@ -60,11 +60,11 @@ let allVariable={
     styleCommands:{
 
         stylePath: "%c",
-        styleExpired: "color: red",
-        styleValid: "color: yellow",
-        styleOld: "color: orange",
-        styleNew: "color: green"
-    
+        styleExpired: "background-color: red; border-radius: 5px; padding: 3px",
+        styleValid: "background-color: yellow; border-radius: 5px; padding: 3px",
+        styleOld: "background-color: orange; border-radius: 5px; padding: 3px",
+        styleNew: "background-color: green; border-radius: 5px; padding: 3px",
+        styleError: "color: red;"
     },
 
     productsList:[], //lista prodotti inseriti
