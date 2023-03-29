@@ -290,8 +290,7 @@ function generateOutputConsole(){
 
 /**
  * Generates the whole HTML output
- * @name generateOutputHTML
- * @returns 
+ * @name generateOutputHTML 
  */
 function generateOutputHTML(){  
     /**
