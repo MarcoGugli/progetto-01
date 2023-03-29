@@ -77,7 +77,7 @@ function generateName()
 ```
 This function returns a `String` value.
 It generates a random name starting from the array `supermarket` declared in the `main.js` sheet.
-Using the Math.floor function generates a random number between 0 and the number of items within the `supermarker`string, and then rounds it down if it's a decimal number.
+Using the Math.floor function generates a random number between 0 and the number of items within the `supermarker` array, and then rounds it down if it's a decimal number.
 `let randProd=supermarket[n]` assigns the element of the supermarket array at the random index generated in the previous line to a variable called randProd.
 
 <br>

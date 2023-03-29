@@ -241,7 +241,10 @@ function tableCreator(){
     container.appendChild(table);
 }
 
-
+/**
+ * generates the console output
+ * @param {}
+ */
 function generateOutputConsole(){
     /**
      * adds the headers "week of ..." and "filtered" with their own separators
@@ -263,7 +266,7 @@ function generateOutputConsole(){
     /**
      * outputs id number + item name + expiry date + week check 
      * @name formattingOutput
-     * @param {void}
+     * @param {}
      */
     function formattingOutput(){
 
