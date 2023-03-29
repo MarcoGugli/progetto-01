@@ -267,6 +267,7 @@ function generateOutputConsole(){
      * outputs id number + item name + expiry date + week check 
      * @name formattingOutput
      * @param {}
+     * @return {void, void}
      */
     function formattingOutput(){
 
